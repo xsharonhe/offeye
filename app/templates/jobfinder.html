@@ -1,0 +1,52 @@
+{% extends "template.html" %}
+
+{% block title %} JobFind {% endblock %}
+{% block stylesheet %} <link rel="stylesheet" href= "{{ url_for('static', filename='styles/chat.styles.css') }}">
+<link rel="stylesheet" href= "{{ url_for('static', filename='styles/jobfinder.styles.css') }}">
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+{% endblock %}
+
+{% block messages %}
+     {% with messages = get_flashed_messages() %}
+       {% if messages %}
+         <div class="alert alert-success alert-dismissible fade show" role="alert">
+             {% for message in messages %}
+               {{ message }}
+             {% endfor %}
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+             </button>
+         </div>
+       {% endif %}
+     {% endwith %}
+ {% endblock %}
+
+{% block content %}
+    <p id="test"> </p>
+    <div class="row" style="padding-top:10px;" >
+        <div class="col"><hr></div>
+        <div class="col-auto"><p class="h3" align="center">JOBFIND</p></div>
+        <div class="col"><hr></div>
+    </div>
+    <div class="container">
+            <div class="container"> <b style="color:#000" class="right-robo"> JOB FINDER</b><p> 
+            Hello, I am your friendly JobSearch Robot. Please the following commands to get started.
+            <ul>
+                <li> <b> Mango </b> </li>
+            </ul> 
+            </p> <span class="time-right"> now </span></div>
+            <div id="messagesBot" class="overflow-auto msgs" style="overflow-y: scroll; height:500px;">
+            </div>
+            <form id="msgForm" action="" method="POST" style="bottom:0; margin: 0% 0% 0% 0%;">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Message" aria-label="Message" id="msg">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" id="sendBtn">Send</button>
+                    </div>
+                </div>
+            </form>
+    </div>
+    <button class="btn btn-primary" type="submit" id="VOICE">VOICE AUTOMATION</button>
+    <script type="text/javascript"
+                src="{{ url_for("static", filename="../static/responses/jobfinder.js")}}"> </script>
+{% endblock %} 

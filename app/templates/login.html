@@ -1,0 +1,48 @@
+{% extends "template.html" %}
+
+{% block title %} Login {% endblock %}
+{% block stylesheet %} 
+<link rel="stylesheet" href= "{{ url_for('static', filename='styles/login.styles.css') }}">
+{% endblock%}
+
+{% block messages %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+            {% for message in messages %}
+              {% set display = slice(message, "1:") %}
+              {% set prefix = slice[0] %}
+              {% if prefix == "1" %}
+                <div class="alert alert-info alert-dismissible" role="alert">
+                <span aria-hidden="true">&times;</span>
+                {{ display }}
+                </div>
+              {% else %}
+                <div class="alert alert-dange alert-dismissibler" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ display }}
+                </div>
+              {% endif %}
+            {% endfor %}
+      {% endif %}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+    <div class="login-form">
+        <h1> Login </h1>
+        <form action="#" method="POST"> 
+            <fieldset>
+                <div class="form-group">
+                    <label class="name-label" for="name">Name:</label>
+                    <input type="text" class="form-control name-text" name="inputName" aria-describedby="emailHelp" placeholder="Enter name" >
+                </div>
+            </fieldset>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="../static/responses/login.js")}}"> </script>
+{% endblock %} 

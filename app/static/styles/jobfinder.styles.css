@@ -1,0 +1,6 @@
+.container b.right-robo {
+    float: right;
+    margin-left: 20px;
+    margin-right: 0;
+    max-width: 100px;
+}

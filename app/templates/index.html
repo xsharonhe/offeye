@@ -1,0 +1,12 @@
+{% extends "template.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+    <h1> Home </h1>
+    <button id="button" type="button" class="btn btn-primary">LOGIN</button>
+    <script type="text/javascript"
+            src="{{ url_for("static", filename="../static/responses/index.js")}}">
+
+{% endblock %} 

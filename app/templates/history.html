@@ -1,0 +1,38 @@
+{% extends "template.html" %}
+
+{% block title %}Message History{% endblock %}
+{% block stylesheet %} 
+<link rel="stylesheet" href= "{{ url_for('static', filename='styles/chat.styles.css') }}">
+{% endblock%}
+
+{% block messages %}
+     {% with messages = get_flashed_messages() %}
+       {% if messages %}
+         <div class="alert alert-success alert-dismissible" role="alert">
+             {% for message in messages %}
+               {{ message }}
+             {% endfor %}
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+             </button>
+         </div>
+       {% endif %}
+     {% endwith %}
+ {% endblock %}
+
+{% block content %}
+    <div class="row" style="padding-top:10px;" >
+        <div class="col"><hr></div>
+        <div class="col-auto"><p class="h3" align="center">View Message History</p></div>
+        <div class="col"><hr></div>
+    </div>
+    <div class="container">
+        <div class="overflow-auto" class="msgs" id="messagesHistory" style="overflow-y: scroll; height:500px;">
+            {% for msg in history %}
+                <div class="container darker"><b style="color:#000" class="left">{{msg["name"]}}</b><p> {{msg["message"]}}</p><span class="time-left">{{msg["time"]}}</span></div>
+            {% endfor %}
+        </div>
+    </div>
+    <script type="text/javascript"
+                    src="{{ url_for("static", filename="../static/responses/chat.js")}}"> </script>
+{% endblock %}
