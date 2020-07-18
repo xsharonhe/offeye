@@ -107,6 +107,32 @@ def history():
     return render_template("history.html", **{"history":json_messages})
 
 
+#REDIRECTION
+@view.route("/chat/highschool")
+def highschool_chat():
+    """
+    HIGH SCHOOL CHAT ROOM
+    :param None
+    """
+    return render_template("highschool.html", **{"session": "session"})
+
+@view.route("/chat/undergraduate")
+def undergraduate_chat():
+    """
+    UNDERGRADUATE CHAT ROOM
+    :param None
+    """
+    return render_template("undergraduate.html", **{"session": "session"})
+
+
+@view.route("/chat/graduate")
+def graduate_chat():
+    """
+    GRADUATE CHAT ROOM
+    :param None
+    """
+    return render_template("graduate.html", **{"session": "session"})
+
 @view.route("/get_history")
 def get_history(name):
     """
@@ -132,12 +158,6 @@ def robo():
 
     return jsonify(messages)
 
-
-@view.route('/texttospeech')
-def speech_to_text(text):
-    speech = Speech()
-    speech.TextToSpeech(text)
-    return True
 
 # UTILITIES
 def remove_seconds_from_messages(msgs):
