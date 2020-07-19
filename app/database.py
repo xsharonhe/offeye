@@ -130,7 +130,9 @@ class DataBase:
         self.conn.commit()
 
 
-    def find_admin(self, name):
-        if not name:
-            query = f"SELECT * FROM {JOB_TABLE}"
-            self.cursor.execute(query)
+    def find_admin(self):
+        query = f"SELECT * FROM {ADMIN_EMAILS}"
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        result = result[0]
+        return str(result)

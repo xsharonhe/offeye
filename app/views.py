@@ -21,17 +21,27 @@ def login():
         schoolOptions = request.form["schoolOptions"]
         db = DataBase()
         db.save_email(name, email, )
+        print(name)
         if len(name) >= 1:
             session[NAME_KEY] = name
-            flash('0You were successfully logged in as {}.'.format(name))
             if schoolOptions == '1':
+                flash('You were successfully logged in as {}.'.format(name))
                 return redirect(url_for("views.highschool_chat"))
             elif schoolOptions == '2':
+                flash('You were successfully logged in as {}.'.format(name))
                 return redirect(url_for("views.undergraduate_chat"))
             elif schoolOptions == '3':
+                flash('You were successfully logged in as {}.'.format(name))
                 return redirect(url_for("views.graduate_chat"))
             elif schoolOptions == '4':
-                return redirect(url_for("views.admin_form"))
+                # VALIDATE ADMIN
+                print("I HAVE REACHED HERE")
+                msgs = db.find_admin()
+                if name != "YOUTH HACKS":
+                    flash("0You are not an admin.")
+                    return redirect(url_for("views.login"))
+                else:
+                    return redirect(url_for("views.admin_form"))
             else:
                 return redirect(url_for("views.chat"))
         else:
