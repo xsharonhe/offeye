@@ -134,48 +134,62 @@ async function add_messages(msg, scrolled){
       await add_messages(msg, true)
       let newsletter = ["Send newsletter", "send newsletter", "sendnewsletter", "Sendnewsletter"];
       for (let j = 0; j < newsletter.length; j++) {
-          if(msg.message ===(newsletter[j])){
-            function sendEmail() {
-              Email.send({
-                SecureToken: "8c9eb67a-3199-4287-8415-5beff73515d9",
-                To: 'offeye123@gmail.com',
-                From: "offeye123@gmail.com",
-                Subject: "Here is more information about the Canada Job Expo for High School Students Just Like You!",
-                Body: "https://www.eventbrite.ca/e/canada-job-expo-july-2020-now-a-virtual-event-tickets-95752713945"
-              })
+        if (msg.message === (newsletter[j])) {
+          function sendEmail() {
+            Email.send({
+              SecureToken: "8c9eb67a-3199-4287-8415-5beff73515d9",
+              To: 'offeye123@gmail.com',
+              From: "offeye123@gmail.com",
+              Subject: "Here is more information about the Canada Job Expo for High School Students Just Like You!",
+              Body: "https://www.eventbrite.ca/e/canada-job-expo-july-2020-now-a-virtual-event-tickets-95752713945"
+            })
+          }
+
+          sendEmail();
+          setTimeout(async (robo, roboDiv) => {
+            function playAudio() {
+              var audio = new Audio('https://github.com/xsharonhe/offeye/blob/master/welcome.mp3')
+              audio.play();
             }
-              sendEmail();
-              setTimeout(async(robo, roboDiv) => {
-              function playAudio() {
-                  var audio = new Audio('https://github.com/xsharonhe/offeye/blob/master/welcome.mp3')
-                  audio.play();
-              }
-              var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Hold on a second...</p><span class="time-right"> now</span></div>'
-              var roboDiv = document.getElementById("messagesBot")
-              roboDiv.innerHTML += robo
-            }, 1000)
-              setTimeout(async(robo, roboDiv) => {
-              var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Email has been sent! </p><span class="time-right"> now</span></div>'
-              var roboDiv = document.getElementById("messagesBot")
+
+            var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Hold on a second...</p><span class="time-right"> now</span></div>'
+            var roboDiv = document.getElementById("messagesBot")
             roboDiv.innerHTML += robo
-            }, 2000)
-
-      }
-      let joinCommunity = ["Join community"]
-      for (let k = 0; k < joinCommunity.length; k++) {
-        if(msg.message ===(joinCommunity[j])){
-          setTimeout(async(robo, roboDiv) => {
-            var popup = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Window will popup soon! :) </p><span class="time-right"> now</span></div>'
-            var popupDiv = document.getElementById("messagesBot")
-            popupDiv.innerHTML += popup
           }, 1000)
-          setTimeout(() => {
-            window.open('https://github.com/OffEye-Developers-Hub') 
+          setTimeout(async (robo, roboDiv) => {
+            var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Email has been sent! </p><span class="time-right"> now</span></div>'
+            var roboDiv = document.getElementById("messagesBot")
+            roboDiv.innerHTML += robo
           }, 2000)
-        }
-    }
-  }
 
+        }
+        let joinCommunity = ["Join community"]
+        for (let k = 0; k < joinCommunity.length; k++) {
+          if (msg.message === (joinCommunity[j])) {
+            setTimeout(async (robo, roboDiv) => {
+              var popup = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Window will popup soon! :) </p><span class="time-right"> now</span></div>'
+              var popupDiv = document.getElementById("messagesBot")
+              popupDiv.innerHTML += popup
+            }, 1000)
+            setTimeout(() => {
+              window.open('https://github.com/OffEye-Developers-Hub')
+            }, 2000)
+          }
+        }
+        let showTable = ['Show opportunities']
+        for (let l = 0; l < showTable.length; l++) {
+          if (msg.message === (showTable[j])) {
+            setTimeout(async (robo, roboDiv) => {
+              var popup = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> <table class="table table-hover"> <thead> <tr> <th scope="col">Type</th><th scope="col">Column heading</th><th scope="col">Column heading</th> <th scope="col">Column heading</th> </tr> </thead> <tbody> <tr class="table-active"> <th scope="row">Active</th> <td>Column content</td> <td>Column content</td> <td>Column content</td> </tr> <tr> <th scope="row">Default</th> <td>Column content</td> <td>Column content</td> <td>Column content</td> </tr> <tr class="table-primary"> <th scope="row">Primary</th> <td>Column content</td> <td>Column content</td> <td>Column content</td> </tr> </tbody> </table> <span class="time-right"> now</span></div>'
+              var popupDiv = document.getElementById("messagesBot")
+              popupDiv.innerHTML += popup
+            }, 1000)
+            setTimeout(() => {
+              window.open('https://github.com/OffEye-Developers-Hub')
+            }, 2000)
+          }
+        }
+      }
 })
 
   window.onload = async function() {
