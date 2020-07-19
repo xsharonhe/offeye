@@ -39,11 +39,7 @@ def login():
                 msgs = db.find_admin()
                 name = "('" + name + "',)"
                 admin = ''.join(msgs)
-                print(name)
-                print(type(msgs))
-                print(type(admin))
                 if name != admin:
-                    print(admin)
                     flash("0You are not an admin.")
                     return redirect(url_for("views.login"))
                 else:
@@ -146,6 +142,12 @@ def admin_form():
     if NAME_KEY not in session:
         flash("0Please login before viewing message history")
         return redirect(url_for("views.login"))
+
+    def login():
+        if request.method == "POST":  # if user input a name
+            name = request.form["inputName"]
+            email = request.form["email"]
+            schoolOptions = request.form["schoolOptions"]
 
     return render_template("admin.html", **{"session": session})
 
