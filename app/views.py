@@ -144,10 +144,9 @@ def admin_form():
         return redirect(url_for("views.login"))
 
     if request.method == "POST":  # if user input a name
-        name = request.form["inputName"]
-        email = request.form["email"]
-        schoolOptions = request.form["schoolOptions"]
-
+        orgName = request.form["orgName"]
+        contactInfo = request.form["contactInfo"]
+        jobTitle = request.form["jobTitle"]
     return render_template("admin.html", **{"session": session})
 
 

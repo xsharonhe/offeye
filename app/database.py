@@ -13,9 +13,6 @@ SAMPLE_ADMIN = "YOUTH HACKS"
 
 
 class DataBase:
-    """
-    used to connect, write to and read from a local sqlite3 database
-    """
     def __init__(self):
         """
         try to connect to file and create cursor
