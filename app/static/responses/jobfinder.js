@@ -132,6 +132,13 @@ async function add_messages(msg, scrolled){
 
     socket.on( 'message response', async function( msg ) {
       await add_messages(msg, true)
+                if (msg.message === 'Show opportunities') {
+            setTimeout(async (popup, popupDiv) => {
+              var popup = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> <p> Here are the opportunities we found: </p> <table class="table table-hover"> <thead> <tr> <th scope="col">Organization</th><th scope="col">Opportunity</th><th scope="col">Description</th> <th scope="col"> Contact Information </th> </tr> </thead> <tbody> <tr class="table-info"> <th scope="row">YMCA</th> <td> <a href="https://ca.indeed.com/jobs?q=youth&l=Toronto%2C%20ON&vjk=60d4e47861e854a6&advn=1155404672915513">Youth Job Collection Program </a></td> <td>For youth from 15 to 29 to help them find employment</td> <td> info@ymca.ca</td> </tr> <tr> <tr class="table-success"> <th scope="row"> Toronto Humane Society </th> <td><a href="https://ca.indeed.com/jobs?q=youth&l=Toronto%2C%20ON&vjk=2c37a0b190c83cc0"> Marketing Intern </a></td> <td>Writeups for animal promotions </td> <td>humane@society.ca</td> </tr> </tr> <tr class="table-primary"> <th scope="row"> Foot Locker </th> <td> <a href="https://ca.indeed.com/jobs?q=youth&l=Toronto%2C%20ON&vjk=8d8d8bb9b8dd1829"> Sales Associate </a></td> <td>Enthusiasm with customers to sell shoes</td> <td>info@footlocker.ca</td> </tr> </tbody> </table> <span class="time-right"> now</span></div>'
+              var popupDiv = document.getElementById("messagesBot")
+              popupDiv.innerHTML += popup
+            }, 1000)
+          }
       let newsletter = ["Send newsletter", "send newsletter", "sendnewsletter", "Sendnewsletter"];
       for (let j = 0; j < newsletter.length; j++) {
         if (msg.message === (newsletter[j])) {
@@ -168,19 +175,6 @@ async function add_messages(msg, scrolled){
           if (msg.message === (joinCommunity[j])) {
             setTimeout(async (robo, roboDiv) => {
               var popup = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Window will popup soon! :) </p><span class="time-right"> now</span></div>'
-              var popupDiv = document.getElementById("messagesBot")
-              popupDiv.innerHTML += popup
-            }, 1000)
-            setTimeout(() => {
-              window.open('https://github.com/OffEye-Developers-Hub')
-            }, 2000)
-          }
-        }
-        let showTable = ['Show opportunities']
-        for (let l = 0; l < showTable.length; l++) {
-          if (msg.message === (showTable[j])) {
-            setTimeout(async (robo, roboDiv) => {
-              var popup = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> <table class="table table-hover"> <thead> <tr> <th scope="col">Type</th><th scope="col">Column heading</th><th scope="col">Column heading</th> <th scope="col">Column heading</th> </tr> </thead> <tbody> <tr class="table-active"> <th scope="row">Active</th> <td>Column content</td> <td>Column content</td> <td>Column content</td> </tr> <tr> <th scope="row">Default</th> <td>Column content</td> <td>Column content</td> <td>Column content</td> </tr> <tr class="table-primary"> <th scope="row">Primary</th> <td>Column content</td> <td>Column content</td> <td>Column content</td> </tr> </tbody> </table> <span class="time-right"> now</span></div>'
               var popupDiv = document.getElementById("messagesBot")
               popupDiv.innerHTML += popup
             }, 1000)
