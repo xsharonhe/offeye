@@ -12,26 +12,26 @@ class Speech():
         engine.say(command)  
         engine.runAndWait()
         
-    # def SpeechToText(self):
-    #     try:
-    #         print("I have started")
-    #         with sr.Microphone() as source2:
-    #             r = sr.Recognizer()
-    #             r.adjust_for_ambient_noise(source2, duration=0.2)
-    #
-    #             audio2 = r.listen(source2)
-    #             MyText = r.recognize_google(audio2)
-    #             MyText = MyText.lower()
-    #
-    #             print("Did you say "+MyText)
-    #             self.SpeakText(MyText)
-    #             return MyText
-    #     except sr.RequestError as e:
-    #             print("Could not request results; {0}".format(e))
-    #     except sr.UnknownValueError:
-    #             print("unknown error occured")
-    #     finally:
-    #         return "Sorry we could not comprehend"
+    def SpeechToText(self):
+         try:
+             print("I have started")
+             with sr.Microphone() as source2:
+                 r = sr.Recognizer()
+                 r.adjust_for_ambient_noise(source2, duration=0.2)
+
+                 audio2 = r.listen(source2)
+                 MyText = r.recognize_google(audio2)
+                 MyText = MyText.lower()
+
+                 print("Did you say "+MyText)
+                 self.SpeakText(MyText)
+                 return MyText
+         except sr.RequestError as e:
+                 print("Could not request results; {0}".format(e))
+         except sr.UnknownValueError:
+                 print("unknown error occured")
+         finally:
+             return "Sorry we could not comprehend"
         
     def TextToSpeech(self, text):
         try:
