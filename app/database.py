@@ -95,7 +95,8 @@ class DataBase:
         query = "INSERT INTO {} VALUES (?, ?, ?, ?)".format(CHAT_TABLE)
         self.cursor.execute(query, (name, msg, datetime.now(), None))
         self.conn.commit()
-        
+
+
     def robo_messages(self, limit=100, name=None):
         """
         returns all ROBOT messages
@@ -139,3 +140,27 @@ class DataBase:
         result = self.cursor.fetchall()
         result = result[0]
         return str(result)
+
+
+    def insert_jobs(self, name, job, contact):
+        jobData = "INSERT INTO {} VALUES (?, ?, ?)".format(JOB_POSTINGS)
+        self.cursor.execute(jobData, (name, job, contact))
+
+
+    def get_jobs(self, name=None):
+        if not name:
+            query = f"SELECT * FROM {JOB_POSTINGS}"
+            self.cursor.execute(query)
+        else:
+            query = f"SELECT * FROM {JOB_POSTINGS}"
+            self.cursor.execute(query)
+
+        result = self.cursor.fetchall()
+
+        results = []
+        for r in sorted(result, key=lambda x: x[3], reverse=True)[:limit]:
+            orgName, jobTitle, contactInfo = r
+            data = {"orgName": orgName, "jobTitle":jobTitle, "time":contactInfo}
+            results.append(data)
+
+        return list(reversed(results))
