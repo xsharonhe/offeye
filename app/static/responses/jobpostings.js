@@ -1,11 +1,10 @@
 async function add_jobs(job, scrolled){
   if( typeof job.orgName !== 'undefined' ) {
     var orgName = await load_orgName()
-      console.log(orgName)
       var jobTitle = await load_jobTitle()
       var contact = await load_contact()
 
-    var content = '<div class="container">' + '<b style="color:#000" class="right">'+ orgName +'</b><p>' + jobTitle +'</p><br/><p>' + contact + '</p></div>'
+    var content = '<div class="container">' + '<b style="color:#000" class="right">'+ orgName +'</b><p>' + contact +'</p><br/><p>' + jobTitle + '</p></div>'
     // update div
       console.log("added")
     var messageDiv = document.getElementById("messages")

@@ -35,7 +35,6 @@ def login():
                 return redirect(url_for("views.graduate_chat"))
             elif schoolOptions == '4':
                 # VALIDATE ADMIN
-                print("I HAVE REACHED HERE")
                 msgs = db.find_admin()
                 name = "('" + name + "',)"
                 admin = ''.join(msgs)
@@ -151,7 +150,7 @@ def admin_form():
         job = db.insert_jobs(name, jobTitle, contact)
         redirect(url_for("views.jobpostings"))
 
-    return render_template("jobpostings.html", **{"session": session})
+    return render_template("admin.html", **{"session": session})
 
 
 @view.route('/jobpostings')

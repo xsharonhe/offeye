@@ -8,12 +8,17 @@ async function load_orgName(){
       });
 };
 
+
+window.onload = () => {
+    $("#hiddenAdmin").hide();
+}
      var form = $( 'form#login' ).on( 'submit', async function( e ) {
       e.preventDefault()
 
          var name = document.getElementById(name).value
-        var formName = load_orgName()
-        if (name === formName) {
+         console.log(name)
+        var formName = load_orgName();
+        if (name === "YOUTH HACKS") {
              $("#hiddenAdmin").show();
         }
 
