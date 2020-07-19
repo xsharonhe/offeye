@@ -1,4 +1,4 @@
-async function add_messages(msg, scroll){
+async function add_messages(msg, scrolled){
   if( typeof msg.name !== 'undefined' ) {
     var date = dateNow()
 
@@ -18,7 +18,7 @@ async function add_messages(msg, scroll){
     messageDiv.innerHTML += content
   }
 
-  if (scroll){
+  if (scrolled){
     scrollSmoothToBottom("messages");
   }
 }
@@ -134,9 +134,9 @@ var socket = io.connect('http://' + document.domain + ':' + location.port);
 window.onload = async function() {
   var msgs = await load_messages()
   for (i = 0; i < msgs.length; i++){
-    scroll = false
-    if (i == msgs.length-1) {scroll = true}
-    add_messages(msgs[i], scroll)
+    scrolled = false
+    if (i == msgs.length-1) {scrolled = true}
+    add_messages(msgs[i], scrolled)
   }
 
   let name = await load_name()

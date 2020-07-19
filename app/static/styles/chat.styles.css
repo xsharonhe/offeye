@@ -7,20 +7,17 @@
     margin: auto;
     }
 
-    /* Darker chat container */
     .darker {
     border-color: #ccc;
     background-color: #ddd;
     }
 
-    /* Clear floats */
     .container::after {
     content: "";
     clear: both;
     display: table;
     }
 
-    /* Style images */
     .container b {
     float: left;
     max-width: 60px;
@@ -29,14 +26,12 @@
     border-radius: 50%;
     }
 
-    /* Style the right image */
     .container b.right {
     float: right;
     margin-left: 20px;
     margin-right:0;
     }
 
-    /* Style time text */
     .time-right {
     float: right;
     color: #aaa;
