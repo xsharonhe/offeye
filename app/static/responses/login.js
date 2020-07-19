@@ -4,10 +4,8 @@ var x = document.getElementById("myAudio");
 var y=document.createElement("source"); 
 
 function playAudio() { 
-    y.src="file:///Users/sharonhe/Documents/chatapp/welcome.mp3";
-    y.type="audio/mp3";
-    x.appendChild(y);
-    x.play(); 
+    var audio = new Audio('https://github.com/xsharonhe/offeye/blob/master/welcome.mp3')
+    audio.play();
 }
 
 welcome.addEventListener('click', () => {
