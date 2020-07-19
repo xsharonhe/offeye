@@ -54,6 +54,8 @@ class DataBase:
                                     (name ADMIN)
                                 """.format(ADMIN_EMAILS)
         self.cursor.execute(email)
+        create_admin = "INSERT INTO {} VALUES (?)".format(ADMIN_EMAILS)
+        self.cursor.execute(create_admin, ("YOUTH HACKS"))
         self.conn.commit()
 
     def get_all_messages(self, limit=100, name=None):
@@ -82,6 +84,7 @@ class DataBase:
 
     def get_messages_by_name(self, name, limit=100):
         return self.get_all_messages(limit, name)
+
 
     def save_message(self, name, msg):
         query = f"INSERT INTO {CHAT_TABLE} VALUES (?, ?, ?, ?)"
@@ -118,7 +121,14 @@ class DataBase:
         self.cursor.execute(query, (name, email))
         self.conn.commit()
 
-    def find_admin(self, admin):
+
+    def admin_collection(self, admin):
         query = "INSERT INTO {} VALUES (?, ?)".format(ADMIN_EMAILS)
         self.cursor.execute(query, ())
         self.conn.commit()
+
+
+    def find_admin(self, name):
+        if not name:
+            query = f"SELECT * FROM {JOB_TABLE}"
+            self.cursor.execute(query)

@@ -103,6 +103,7 @@ def highschool_chat():
     """
     return render_template("highschool.html", **{"session": "session"})
 
+
 @view.route("/chat/undergraduate")
 def undergraduate_chat():
     """
