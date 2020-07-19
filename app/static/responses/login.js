@@ -8,9 +8,6 @@ function playAudio() {
     audio.play();
 }
 
-function windowPopup() {
-    window.open('https://github.com/OffEye-Developers-Hub')
-}
 
 welcome.addEventListener('click', () => {
     windowPopup();

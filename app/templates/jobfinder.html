@@ -1,7 +1,8 @@
 {% extends "template.html" %}
 
 {% block title %} JobFind {% endblock %}
-{% block stylesheet %} <link rel="stylesheet" href= "{{ url_for('static', filename='styles/chat.styles.css') }}">
+{% block stylesheet %}
+<link rel="stylesheet" href= "{{ url_for('static', filename='styles/chat.styles.css') }}">
 <link rel="stylesheet" href= "{{ url_for('static', filename='styles/jobfinder.styles.css') }}">
 <script src="https://smtpjs.com/v3/smtp.js"></script>
 {% endblock %}
@@ -29,7 +30,7 @@
         <div class="col"><hr></div>
     </div>
     <div class="container">
-            <div class="container" style="color:#3282b8"> <b style="color:#3282b8" class="right-robo"> OFFEYE </b><p>
+            <div class="container" style="color:#black"> <b style="color:#black" class="right-robo"> OFFEYE </b><p>
             Hello, I am your friendly OFFEYE Robot. At the beginning of logging in, you specified that you were a high
                 school student. Please enter one of the following commands to get started.
             <ul>
@@ -51,5 +52,8 @@
                 </div>
             </form>
             <button class="btn btn-primary" type="submit" id="pauseAudio">PAUSE AUDIO</button>
+            
     </div>
+    <script type="text/javascript"
+                src="{{ url_for("static", filename="../static/responses/jobfinder.js")}}"> </script>
 {% endblock %} 

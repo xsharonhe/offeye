@@ -1,14 +1,14 @@
 async function add_messages(msg, scrolled){
     if( typeof msg.name !== "undefined" ) {
       var date = dateNow()
-  
+
       if ( typeof msg.time !== "undefined") {
         var n = msg.time
       }else{
         var n = date
       }
       var global_name = await load_name()
-  
+
       var content = '<div class="container">' + '<b style="color:#000" class="right">'+msg.name+'</b><p>' + msg.message +'</p><span class="time-right">' + n + '</span></div>'
       if (global_name == msg.name){
         content = '<div class="container darker">' + '<b style="color:#000" class="left">'+msg.name+'</b><p>' + msg.message +'</p><span class="time-left">' + n + '</span></div>'
@@ -17,12 +17,12 @@ async function add_messages(msg, scrolled){
       var messageDiv = document.getElementById("messagesBot")
       messageDiv.innerHTML += content
     }
-  
+
     if (scrolled){
       scrollSmoothToBottom("messagesBot");
     }
   }
-  
+
 
   async function load_name(){
     return await fetch('/get_name')
@@ -32,8 +32,8 @@ async function add_messages(msg, scrolled){
             return text["name"]
         });
   };
-  
-  
+
+
   async function load_messages() {
     return await fetch('/clean')
      .then(async function (response) {
@@ -42,57 +42,57 @@ async function add_messages(msg, scrolled){
         return text
     });
   }
-  
-  
+
+
   $(function()
   {
     $('.msgs') .css({'height': (($(window).height()) * 0.7)+'px'});
-  
+
     $(window).bind('resize', function(){
         $('.msgs') .css({'height': (($(window).height()) * 0.7)+'px'});
     });
   });
-  
-  
+
+
   function scrollSmoothToBottom (id) {
    var div = document.getElementById(id);
    $('#' + id).animate({
       scrollTop: div.scrollHeight - div.clientHeight
    }, 500);
   }
-  
-  
+
+
   function dateNow() {
     var date = new Date();
     var aaaa = date.getFullYear();
     var gg = date.getDate();
     var mm = (date.getMonth() + 1);
-  
+
     if (gg < 10)
         gg = "0" + gg;
-  
+
     if (mm < 10)
         mm = "0" + mm;
-  
+
     var cur_day = aaaa + "-" + mm + "-" + gg;
-  
+
     var hours = date.getHours()
     var minutes = date.getMinutes()
     var seconds = date.getSeconds();
-  
+
     if (hours < 10)
         hours = "0" + hours;
-  
+
     if (minutes < 10)
         minutes = "0" + minutes;
-  
+
     if (seconds < 10)
         seconds = "0" + seconds;
-  
+
     return cur_day + " " + hours + ":" + minutes;
   }
-  
-  
+
+
   var socket = io.connect('http://' + document.domain + ':' + location.port);
     socket.on( 'connect', async function() {
       var usr_name = await load_name()
@@ -104,15 +104,15 @@ async function add_messages(msg, scrolled){
       }
       var form = $( 'form#msgForm' ).on( 'submit', async function( e ) {
         e.preventDefault()
-  
+
         // get input from message box
         let msg_input = document.getElementById("msg")
         let user_input = msg_input.value
         let user_name = await load_name()
-  
+
         // clear msg box value
         msg_input.value = ""
-  
+
         // send message to other users
         socket.emit( 'event', {
           message : user_input,
@@ -132,10 +132,9 @@ async function add_messages(msg, scrolled){
 
     socket.on( 'message response', async function( msg ) {
       await add_messages(msg, true)
-      var fruits = ["Send newsletter", "send newsletter", "sendnewsletter"];
-      for (let j = 0; j < fruits.length; j++) {
-        console.log(fruits[j])
-          if(msg.message ===(fruits[j])){
+      let newsletter = ["Send newsletter", "send newsletter", "sendnewsletter", "Sendnewsletter"];
+      for (let j = 0; j < newsletter.length; j++) {
+          if(msg.message ===(newsletter[j])){
             function sendEmail() {
               Email.send({
                 SecureToken: "8c9eb67a-3199-4287-8415-5beff73515d9",
@@ -162,24 +161,37 @@ async function add_messages(msg, scrolled){
             }, 2000)
 
       }
+      let joinCommunity = ["Join community"]
+      for (let k = 0; k < joinCommunity.length; k++) {
+        if(msg.message ===(joinCommunity[j])){
+          setTimeout(async(robo, roboDiv) => {
+            var popup = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Window will popup soon! :) </p><span class="time-right"> now</span></div>'
+            var popupDiv = document.getElementById("messagesBot")
+            popupDiv.innerHTML += popup
+          }, 1000)
+          setTimeout(() => {
+            window.open('https://github.com/OffEye-Developers-Hub') 
+          }, 2000)
+        }
+    }
   }
 
 })
 
   window.onload = async function() {
     var msgs = await load_messages()
- 
+
     for (i = 0; i < msgs.length; i++){
       scrolled = false
       if (i == msgs.length-1) {scrolled = true}
       add_messages(msgs[i], scrolled)
     }
-  
+
     let name = await load_name()
     if (name != ""){
       $("#login").hide();
     }else{
       $("#logout").hide();
     }
-  
+
   }
