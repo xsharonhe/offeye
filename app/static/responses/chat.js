@@ -121,15 +121,12 @@ var socket = io.connect('http://' + document.domain + ':' + location.port);
       } )
     } )
   } )
-  /*socket.on( 'disconnect', async function( msg ) {
-      var usr_name = await load_name()
-      socket.emit( 'event', {
-      message: usr_name + ' just left the server...',
-    } )
-  })*/
+
+
   socket.on( 'message response', function( msg ) {
     add_messages(msg, true)
   })
+
 
 window.onload = async function() {
   var msgs = await load_messages()
