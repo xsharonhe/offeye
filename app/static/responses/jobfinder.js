@@ -129,28 +129,31 @@ async function add_messages(msg, scroll){
         console.log(fruits[j])
           if(msg.message ===(fruits[j])){
             function sendEmail() {
-              console.log("I am running")
               Email.send({
-                  SecureToken: "8c9eb67a-3199-4287-8415-5beff73515d9",
-                  To : 'offeye123@gmail.com',
-                  From : "offeye123@gmail.com",
-                  Subject : "This",
-                  Body : "This is a meaningful text"
-              }).then(
-                message => alert(message)
-              );
-              }
+                SecureToken: "8c9eb67a-3199-4287-8415-5beff73515d9",
+                To: 'offeye123@gmail.com',
+                From: "offeye123@gmail.com",
+                Subject: "Here is more information about the Canada Job Expo for High School Students Just Like You!",
+                Body: "https://www.eventbrite.ca/e/canada-job-expo-july-2020-now-a-virtual-event-tickets-95752713945"
+              })
+            }
               sendEmail();
             setTimeout(async(robo, roboDiv) => {
-              var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> JOB FINDER </b> I am a fruit. </p><span class="time-right"> now</span></div>'
+              var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Hold on a second...</p><span class="time-right"> now</span></div>'
               var roboDiv = document.getElementById("messagesBot")
-              var speech = "I am a fruit."
-            roboDiv.innerHTML += robo
+              roboDiv.innerHTML += robo
             }, 1000)
-      }}
+            setTimeout(async(robo, roboDiv) => {
+              var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Email has been sent! </p><span class="time-right"> now</span></div>'
+              var roboDiv = document.getElementById("messagesBot")
+            roboDiv.innerHTML += robo
+            }, 2000)
 
-    })
-  
+      }
+  }
+
+})
+
   window.onload = async function() {
     var msgs = await load_messages()
  

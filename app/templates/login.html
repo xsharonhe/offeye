@@ -47,16 +47,19 @@
                 <div class="form-group">
                     <label>
                        <select name="schoolOptions" class="custom-select" required>
-                       <option selected="">Open this select menu</option>
+                       <option selected="">Choose schooling level</option>
                        <option value="1">High school</option>
                        <option value="2">Undergraduate</option>
                        <option value="3">Graduate</option>
-                       </select>
+                    </select>
+                    <small class="form-text text-muted">We will place you in a chat room with similar students! </small>
                    </label>
                     </div>
-                <button type="submit" class="btn btn-primary submitButton">Submit</button>
+                <button type="submit" class="btn btn-primary submitButton" id="submitButton">Submit</button>
             </fieldset>
         </form>
+        <button type="submit" class="btn btn-primary submitButton" id="submitButton2">Submit</button>
+        <audio id="myAudio"></audio>
     </div>
     <script type="text/javascript"
             src="{{ url_for("static", filename="../static/responses/login.js")}}"> </script>
