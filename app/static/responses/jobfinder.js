@@ -158,7 +158,7 @@ async function add_messages(msg, scrolled){
               var audio = new Audio('https://github.com/xsharonhe/offeye/blob/master/welcome.mp3')
               audio.play();
             }
-
+            playAudio()
             var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Hold on a second...</p><span class="time-right"> now</span></div>'
             var roboDiv = document.getElementById("messagesBot")
             roboDiv.innerHTML += robo
