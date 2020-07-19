@@ -12,7 +12,7 @@ ADMIN_EMAILS = "Admins"
 ##
 SAMPLE_ADMIN = "YOUTH HACKS"
 ##
-JOB_POSTINGS = "Job Postings"
+JOB_POSTINGS = "JobPostings"
 
 class DataBase:
     def __init__(self):
@@ -92,7 +92,7 @@ class DataBase:
 
 
     def save_message(self, name, msg):
-        query = "INSERT INTO {} VALUES (?, ?, ?, ?)".format(CHAT_TABLE)
+        query ="INSERT INTO {} VALUES (?, ?, ?, ?)".format(CHAT_TABLE)
         self.cursor.execute(query, (name, msg, datetime.now(), None))
         self.conn.commit()
 
@@ -142,25 +142,26 @@ class DataBase:
         return str(result)
 
 
-    def insert_jobs(self, name, job, contact):
+    def insert_jobs(self, name, jobTitle, contact):
         jobData = "INSERT INTO {} VALUES (?, ?, ?)".format(JOB_POSTINGS)
-        self.cursor.execute(jobData, (name, job, contact))
+        self.cursor.execute(jobData, (name, jobTitle, contact))
+        self.conn.commit()
 
 
-    def get_jobs(self, name=None):
-        if not name:
-            query = f"SELECT * FROM {JOB_POSTINGS}"
-            self.cursor.execute(query)
-        else:
-            query = f"SELECT * FROM {JOB_POSTINGS}"
-            self.cursor.execute(query)
+    def get_jobs(self, limit=100):
+        query = f"SELECT * FROM {JOB_POSTINGS}"
+        self.cursor.execute(query)
 
         result = self.cursor.fetchall()
 
         results = []
-        for r in sorted(result, key=lambda x: x[3], reverse=True)[:limit]:
+        for r in sorted(result, reverse=True)[:limit]:
             orgName, jobTitle, contactInfo = r
             data = {"orgName": orgName, "jobTitle":jobTitle, "time":contactInfo}
             results.append(data)
 
         return list(reversed(results))
+
+
+    def get_all_jobs(self, limit=100):
+        return self.get_jobs(limit)
