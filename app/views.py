@@ -147,7 +147,21 @@ def admin_form():
         orgName = request.form["orgName"]
         contactInfo = request.form["contactInfo"]
         jobTitle = request.form["jobTitle"]
+        db = DataBase()
+        job = db.insert_jobs(orgName, contactInfo, jobTitle)
+        print(job)
+        redirect(url_for("views.jobpostings"))
+
     return render_template("admin.html", **{"session": session})
+
+
+@view.route('/jobpostings')
+def jobpostings():
+    if NAME_KEY not in session:
+        flash("0Please login before viewing message history")
+        return redirect(url_for("views.login"))
+
+    return render_template("jobpostings.html", **{"session": session})
 
 
 # API ENDPOINTS

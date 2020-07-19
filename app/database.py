@@ -12,7 +12,7 @@ ADMIN_EMAILS = "Admins"
 ##
 SAMPLE_ADMIN = "YOUTH HACKS"
 ##
-JOB_POSTINGS = "Job Postings"
+JOB_POSTINGS = "JobPostings"
 
 class DataBase:
     def __init__(self):
@@ -92,7 +92,7 @@ class DataBase:
 
 
     def save_message(self, name, msg):
-        query = "INSERT INTO {} VALUES (?, ?, ?, ?)".format(CHAT_TABLE)
+        query ="INSERT INTO {} VALUES (?, ?, ?, ?)".format(CHAT_TABLE)
         self.cursor.execute(query, (name, msg, datetime.now(), None))
         self.conn.commit()
 
@@ -147,13 +147,9 @@ class DataBase:
         self.cursor.execute(jobData, (name, job, contact))
 
 
-    def get_jobs(self, name=None):
-        if not name:
-            query = f"SELECT * FROM {JOB_POSTINGS}"
-            self.cursor.execute(query)
-        else:
-            query = f"SELECT * FROM {JOB_POSTINGS}"
-            self.cursor.execute(query)
+    def get_jobs(self, limit=100):
+        query = f"SELECT * FROM {JOB_POSTINGS}"
+        self.cursor.execute(query)
 
         result = self.cursor.fetchall()
 
@@ -164,3 +160,7 @@ class DataBase:
             results.append(data)
 
         return list(reversed(results))
+
+
+    def get_all_jobs(self, limit=100):
+        return self.get_jobs(limit)
