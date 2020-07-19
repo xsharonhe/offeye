@@ -155,7 +155,7 @@ class DataBase:
         result = self.cursor.fetchall()
 
         results = []
-        for r in sorted(result, key=lambda x: x[3], reverse=True)[:limit]:
+        for r in sorted(result, reverse=True)[:limit]:
             orgName, jobTitle, contactInfo = r
             data = {"orgName": orgName, "jobTitle":jobTitle, "time":contactInfo}
             results.append(data)

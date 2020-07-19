@@ -186,6 +186,13 @@ def get_messages():
     return jsonify(msgs)
 
 
+@view.route('/get_jobs')
+def get_jobs():
+    db = DataBase()
+    jobs = db.get_all_jobs(MSG_LIMIT)
+    print(jobs)
+    return jsonify(jobs)
+
 @view.route("/get_history")
 def get_history(name):
     db = DataBase()
