@@ -51,7 +51,7 @@ class DataBase:
                         """.format(EMAIL_TABLE)
         self.cursor.execute(email)
         email = """CREATE TABLE IF NOT EXISTS {}
-                                    (name ADMIN, email TEXT)
+                                    (name ADMIN)
                                 """.format(ADMIN_EMAILS)
         self.cursor.execute(email)
         self.conn.commit()
@@ -81,21 +81,9 @@ class DataBase:
         return list(reversed(results))
 
     def get_messages_by_name(self, name, limit=100):
-        """
-        Gets a list of messages by user name
-        :param name: str
-        :return: list
-        """
         return self.get_all_messages(limit, name)
 
     def save_message(self, name, msg):
-        """
-        saves the given message in the table
-        :param name: str
-        :param msg: str
-        :param time: datetime
-        :return: None
-        """
         query = f"INSERT INTO {CHAT_TABLE} VALUES (?, ?, ?, ?)"
         self.cursor.execute(query, (name, msg, datetime.now(), None))
         self.conn.commit()
@@ -128,4 +116,9 @@ class DataBase:
     def save_email(self, name, email):
         query = "INSERT INTO {} VALUES (?, ?)".format(EMAIL_TABLE)
         self.cursor.execute(query, (name, email))
+        self.conn.commit()
+
+    def find_admin(self, admin):
+        query = "INSERT INTO {} VALUES (?, ?)".format(ADMIN_EMAILS)
+        self.cursor.execute(query, ())
         self.conn.commit()
