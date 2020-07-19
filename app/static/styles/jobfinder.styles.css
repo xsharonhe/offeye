@@ -4,3 +4,7 @@
     margin-right: 0;
     max-width: 100px;
 }
+
+.container b.list {
+    max-width: 120px;
+}

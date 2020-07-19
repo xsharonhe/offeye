@@ -121,10 +121,20 @@ async function add_messages(msg, scroll){
       } )
     } )
 
+
+    const pauseAudio = audio => {
+      /*
+      MUST PASS IN AN AUDIO FILE
+       */
+        audio.pause();
+    }
+
+
     socket.on( 'message response', async function( msg ) {
       await add_messages(msg, true)
-
-      var fruits = ["Banana", "Orange", "Apple", "Mango"];
+      //filters messages
+      msg.message = msg.message.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')
+      var fruits = ["Send newsletter", "send newsletter", "sendnewsletter"];
       for (let j = 0; j < fruits.length; j++) {
         console.log(fruits[j])
           if(msg.message ===(fruits[j])){
@@ -138,12 +148,16 @@ async function add_messages(msg, scroll){
               })
             }
               sendEmail();
-            setTimeout(async(robo, roboDiv) => {
+              setTimeout(async(robo, roboDiv) => {
+              function playAudio() {
+                  var audio = new Audio('https://github.com/xsharonhe/offeye/blob/master/welcome.mp3')
+                  audio.play();
+              }
               var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Hold on a second...</p><span class="time-right"> now</span></div>'
               var roboDiv = document.getElementById("messagesBot")
               roboDiv.innerHTML += robo
             }, 1000)
-            setTimeout(async(robo, roboDiv) => {
+              setTimeout(async(robo, roboDiv) => {
               var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Email has been sent! </p><span class="time-right"> now</span></div>'
               var roboDiv = document.getElementById("messagesBot")
             roboDiv.innerHTML += robo
