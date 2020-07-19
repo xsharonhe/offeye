@@ -89,6 +89,11 @@ def history():
     return render_template("history.html", **{"history":json_messages})
 
 
+@view.route('/admin')
+def admin_form():
+    return render_template("admin.html", **{"session": session})
+
+
 #REDIRECTION
 @view.route("/chat/highschool")
 def highschool_chat():
