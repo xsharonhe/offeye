@@ -137,17 +137,16 @@ def graduate_chat():
     return render_template("graduate.html", **{"session": "session"})
 
 
-@view.route('/admin')
+@view.route('/admin', methods=["GET", "POST"])
 def admin_form():
     if NAME_KEY not in session:
         flash("0Please login before viewing message history")
         return redirect(url_for("views.login"))
 
-    def login():
-        if request.method == "POST":  # if user input a name
-            name = request.form["inputName"]
-            email = request.form["email"]
-            schoolOptions = request.form["schoolOptions"]
+    if request.method == "POST":  # if user input a name
+        name = request.form["inputName"]
+        email = request.form["email"]
+        schoolOptions = request.form["schoolOptions"]
 
     return render_template("admin.html", **{"session": session})
 
