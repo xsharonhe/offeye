@@ -161,6 +161,8 @@ def jobpostings():
         flash("0Please login before viewing message history")
         return redirect(url_for("views.login"))
 
+
+
     return render_template("jobpostings.html", **{"session": session})
 
 
