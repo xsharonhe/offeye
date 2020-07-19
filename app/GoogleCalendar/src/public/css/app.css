@@ -1,3 +1,56 @@
+  
+/****** DO NOT TOUCH IF YOU WANT TO SEE THE NAVBAR******/
+.navbar-container {
+    background-color: #383e56;
+  }
+
+  .nav-item {
+      margin: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+
+  .login-container {
+    margin: 50px;
+    text-align: center;
+    border: 2px solid black;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.form-group {
+    margin: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.email {
+    padding-top: 10px;
+}
+
+.name-text {
+    margin-right: 30vw;
+}
+
+.submitButton {
+    margin-top: 20px;
+}
+
+alert {
+    background-color: #9a1f40;
+}
+
+
+  /*******END OF DO NOT TOUCH ****/
+
 .button{
     background-color: #4CAF50;
     border: none;
