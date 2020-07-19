@@ -9,6 +9,7 @@ CHAT_TABLE = "Messages"
 JOB_TABLE = "Jobs"
 EMAIL_TABLE = "Emails"
 ADMIN_EMAILS = "Admins"
+SAMPLE_ADMIN = "YOUTH HACKS"
 
 
 class DataBase:
@@ -54,8 +55,8 @@ class DataBase:
                                     (name ADMIN)
                                 """.format(ADMIN_EMAILS)
         self.cursor.execute(email)
-        create_admin = "INSERT INTO {} VALUES (?)".format(ADMIN_EMAILS)
-        self.cursor.execute(create_admin, ("YOUTH HACKS"))
+        admin = "INSERT INTO {} VALUES (?)".format(ADMIN_EMAILS)
+        self.cursor.execute(admin, (SAMPLE_ADMIN, ))
         self.conn.commit()
 
     def get_all_messages(self, limit=100, name=None):
@@ -82,12 +83,13 @@ class DataBase:
 
         return list(reversed(results))
 
+
     def get_messages_by_name(self, name, limit=100):
         return self.get_all_messages(limit, name)
 
 
     def save_message(self, name, msg):
-        query = f"INSERT INTO {CHAT_TABLE} VALUES (?, ?, ?, ?)"
+        query = "INSERT INTO {} VALUES (?, ?, ?, ?)".format(CHAT_TABLE)
         self.cursor.execute(query, (name, msg, datetime.now(), None))
         self.conn.commit()
         

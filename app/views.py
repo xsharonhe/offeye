@@ -29,12 +29,14 @@ def login():
         db.save_email(name, email, )
         if len(name) >= 1:
             session[NAME_KEY] = name
-            flash('You were successfully logged in as {}.'.format(name))
+            flash('0You were successfully logged in as {}.'.format(name))
+            if schoolOptions == '4':
+                return redirect(url_for("views.admin_form"))
             if schoolOptions == '1':
                 return redirect(url_for("views.highschool_chat"))
-            if schoolOptions == '2':
+            elif schoolOptions == '2':
                 return redirect(url_for("views.undergraduate_chat"))
-            if schoolOptions == '3':
+            elif schoolOptions == '3':
                 return redirect(url_for("views.graduate_chat"))
             else:
                 return redirect(url_for("views.chat"))
@@ -89,11 +91,6 @@ def history():
     return render_template("history.html", **{"history":json_messages})
 
 
-@view.route('/admin')
-def admin_form():
-    return render_template("admin.html", **{"session": session})
-
-
 #REDIRECTION
 @view.route("/chat/highschool")
 def highschool_chat():
@@ -120,6 +117,11 @@ def graduate_chat():
     :param None
     """
     return render_template("graduate.html", **{"session": "session"})
+
+@view.route('/admin')
+def admin_form():
+    return render_template("admin.html", **{"session": session})
+
 
 # API ENDPOINTS
 @view.route("/get_name")

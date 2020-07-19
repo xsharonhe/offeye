@@ -1,6 +1,6 @@
 {% extends "template.html" %}
 
-{% block title %} Login {% endblock %}
+{% block title %} Job Post {% endblock %}
 {% block stylesheet %} 
 <link rel="stylesheet" href= "{{ url_for('static', filename='styles/login.styles.css') }}">
 {% endblock%}
@@ -17,7 +17,7 @@
                 {{ display }}
                 </div>
               {% else %}
-                <div class="alert alert-dange alert-dismissibler" role="alert">
+                <div class="alert alert-success alert-dismissibler" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -31,7 +31,7 @@
 
 {% block content %}
     <div class="login-form">
-        <h1> Login </h1>
+        <h1> JOB POSTINGS</h1>
         <form action="#" method="POST">
             <fieldset>
                 <div class="form-group">
@@ -46,7 +46,7 @@
                     <div class="emailAdd">
                         <label for="exampleInputEmail1">Email address for contact:</label>
                         <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <small id="emailHelp" class="form-text text-muted">We will post this for contact information to our users..</small>
                 </div>
                 <button type="submit" class="btn btn-primary submitButton" id="submitButton">Submit</button>
             </fieldset>
