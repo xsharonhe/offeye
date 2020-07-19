@@ -8,3 +8,16 @@
 .container b.list {
     max-width: 120px;
 }
+
+.container {
+    border: 2px solid #3282b8;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    margin: auto;
+}
+
+.container-large {
+    border: 2px solid #dedede;
+}

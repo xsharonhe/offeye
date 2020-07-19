@@ -132,8 +132,6 @@ async function add_messages(msg, scroll){
 
     socket.on( 'message response', async function( msg ) {
       await add_messages(msg, true)
-      //filters messages
-      msg.message = msg.message.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')
       var fruits = ["Send newsletter", "send newsletter", "sendnewsletter"];
       for (let j = 0; j < fruits.length; j++) {
         console.log(fruits[j])
