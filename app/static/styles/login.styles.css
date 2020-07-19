@@ -31,3 +31,7 @@ h1 {
 .submitButton {
     margin-top: 20px;
 }
+
+alert {
+    background-color: #9a1f40;
+}

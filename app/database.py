@@ -9,12 +9,12 @@ CHAT_TABLE = "Messages"
 JOB_TABLE = "Jobs"
 EMAIL_TABLE = "Emails"
 ADMIN_EMAILS = "Admins"
-
+##
+SAMPLE_ADMIN = "YOUTH HACKS"
+##
+JOB_POSTINGS = "Job Postings"
 
 class DataBase:
-    """
-    used to connect, write to and read from a local sqlite3 database
-    """
     def __init__(self):
         """
         try to connect to file and create cursor
@@ -54,8 +54,12 @@ class DataBase:
                                     (name ADMIN)
                                 """.format(ADMIN_EMAILS)
         self.cursor.execute(email)
-        create_admin = "INSERT INTO {} VALUES (?)".format(ADMIN_EMAILS)
-        self.cursor.execute(create_admin, ("YOUTH HACKS"))
+        admin = "INSERT INTO {} VALUES (?)".format(ADMIN_EMAILS)
+        self.cursor.execute(admin, (SAMPLE_ADMIN, ))
+        job = """CREATE TABLE IF NOT EXISTS {}
+                                            (name TEXT, jobTitle TEXT, contact TEXT)
+                                        """.format(JOB_POSTINGS)
+        self.cursor.execute(job)
         self.conn.commit()
 
     def get_all_messages(self, limit=100, name=None):
@@ -82,12 +86,13 @@ class DataBase:
 
         return list(reversed(results))
 
+
     def get_messages_by_name(self, name, limit=100):
         return self.get_all_messages(limit, name)
 
 
     def save_message(self, name, msg):
-        query = f"INSERT INTO {CHAT_TABLE} VALUES (?, ?, ?, ?)"
+        query = "INSERT INTO {} VALUES (?, ?, ?, ?)".format(CHAT_TABLE)
         self.cursor.execute(query, (name, msg, datetime.now(), None))
         self.conn.commit()
         
@@ -128,7 +133,9 @@ class DataBase:
         self.conn.commit()
 
 
-    def find_admin(self, name):
-        if not name:
-            query = f"SELECT * FROM {JOB_TABLE}"
-            self.cursor.execute(query)
+    def find_admin(self):
+        query = f"SELECT * FROM {ADMIN_EMAILS}"
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        result = result[0]
+        return str(result)

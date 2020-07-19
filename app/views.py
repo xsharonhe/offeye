@@ -15,27 +15,35 @@ MSG_LIMIT = 20
 @view.route("/")
 @view.route("/login", methods=['GET', 'POST'])
 def login():
-    """
-    displays main login page and handles saving name in session
-    :exception POST
-    :return: None
-    """
-
     if request.method == "POST":  # if user input a name
         name = request.form["inputName"]
         email = request.form["email"]
         schoolOptions = request.form["schoolOptions"]
         db = DataBase()
         db.save_email(name, email, )
+        print(name)
         if len(name) >= 1:
             session[NAME_KEY] = name
-            flash('You were successfully logged in as {}.'.format(name))
             if schoolOptions == '1':
+                flash('You were successfully logged in as {}.'.format(name))
                 return redirect(url_for("views.highschool_chat"))
-            if schoolOptions == '2':
+            elif schoolOptions == '2':
+                flash('You were successfully logged in as {}.'.format(name))
                 return redirect(url_for("views.undergraduate_chat"))
-            if schoolOptions == '3':
+            elif schoolOptions == '3':
+                flash('You were successfully logged in as {}.'.format(name))
                 return redirect(url_for("views.graduate_chat"))
+            elif schoolOptions == '4':
+                # VALIDATE ADMIN
+                print("I HAVE REACHED HERE")
+                msgs = db.find_admin()
+                name = "('" + name + "',)"
+                admin = ''.join(msgs)
+                if name != admin:
+                    flash("0You are not an admin.")
+                    return redirect(url_for("views.login"))
+                else:
+                    return redirect(url_for("views.admin_form"))
             else:
                 return redirect(url_for("views.chat"))
         else:
@@ -89,11 +97,6 @@ def history():
     return render_template("history.html", **{"history":json_messages})
 
 
-@view.route('/admin')
-def admin_form():
-    return render_template("admin.html", **{"session": session})
-
-
 #REDIRECTION
 @view.route("/chat/highschool")
 def highschool_chat():
@@ -101,6 +104,10 @@ def highschool_chat():
     HIGH SCHOOL CHAT ROOM
     :param None
     """
+    if NAME_KEY not in session:
+        flash("0Please login before viewing message history")
+        return redirect(url_for("views.login"))
+
     return render_template("highschool.html", **{"session": "session"})
 
 
@@ -110,6 +117,10 @@ def undergraduate_chat():
     UNDERGRADUATE CHAT ROOM
     :param None
     """
+    if NAME_KEY not in session:
+        flash("0Please login before viewing message history")
+        return redirect(url_for("views.login"))
+
     return render_template("undergraduate.html", **{"session": "session"})
 
 
@@ -119,7 +130,25 @@ def graduate_chat():
     GRADUATE CHAT ROOM
     :param None
     """
+    if NAME_KEY not in session:
+        flash("0Please login before viewing message history")
+        return redirect(url_for("views.login"))
+
     return render_template("graduate.html", **{"session": "session"})
+
+
+@view.route('/admin', methods=["GET", "POST"])
+def admin_form():
+    if NAME_KEY not in session:
+        flash("0Please login before viewing message history")
+        return redirect(url_for("views.login"))
+
+    if request.method == "POST":  # if user input a name
+        orgName = request.form["orgName"]
+        contactInfo = request.form["contactInfo"]
+        jobTitle = request.form["jobTitle"]
+    return render_template("admin.html", **{"session": session})
+
 
 # API ENDPOINTS
 @view.route("/get_name")
@@ -139,10 +168,6 @@ def get_messages():
 
 @view.route("/get_history")
 def get_history(name):
-    """
-    :param name: str
-    :return: all messages by name of user
-    """
     db = DataBase()
     msgs = db.get_messages_by_name(name)
     messages = remove_seconds_from_messages(msgs)
@@ -161,11 +186,6 @@ def robo():
 
 # UTILITIES
 def remove_seconds_from_messages(msgs):
-    """
-    removes the seconds from all messages
-    :param msgs: list
-    :return: list
-    """
     messages = []
     for msg in msgs:
         message = msg
