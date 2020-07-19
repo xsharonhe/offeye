@@ -4,22 +4,20 @@
     border-radius: 5px;
     padding: 10px;
     margin: 10px 0;
+    margin: auto;
     }
 
-    /* Darker chat container */
     .darker {
     border-color: #ccc;
     background-color: #ddd;
     }
 
-    /* Clear floats */
     .container::after {
     content: "";
     clear: both;
     display: table;
     }
 
-    /* Style images */
     .container b {
     float: left;
     max-width: 60px;
@@ -28,21 +26,32 @@
     border-radius: 50%;
     }
 
-    /* Style the right image */
     .container b.right {
     float: right;
     margin-left: 20px;
     margin-right:0;
     }
 
-    /* Style time text */
     .time-right {
     float: right;
     color: #aaa;
     }
 
-    /* Style time text */
     .time-left {
     float: left;
     color: #999;
 }
+
+    .top {
+        padding-top:10px
+    }
+
+    #messages {
+        overflow-y: scroll;
+        height:500px;
+    }
+
+    #msgForm {
+        bottom:0;
+        margin: 0% 0% 0% 0%;
+    }

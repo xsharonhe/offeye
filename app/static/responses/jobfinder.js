@@ -1,5 +1,5 @@
-async function add_messages(msg, scroll){
-    if( typeof msg.name !== 'undefined' ) {
+async function add_messages(msg, scrolled){
+    if( typeof msg.name !== "undefined" ) {
       var date = dateNow()
   
       if ( typeof msg.time !== "undefined") {
@@ -18,7 +18,7 @@ async function add_messages(msg, scroll){
       messageDiv.innerHTML += content
     }
   
-    if (scroll){
+    if (scrolled){
       scrollSmoothToBottom("messagesBot");
     }
   }
@@ -121,43 +121,58 @@ async function add_messages(msg, scroll){
       } )
     } )
 
+
+    const pauseAudio = audio => {
+      /*
+      MUST PASS IN AN AUDIO FILE
+       */
+        audio.pause();
+    }
+
+
     socket.on( 'message response', async function( msg ) {
       await add_messages(msg, true)
-
-      var fruits = ["Banana", "Orange", "Apple", "Mango"];
+      var fruits = ["Send newsletter", "send newsletter", "sendnewsletter"];
       for (let j = 0; j < fruits.length; j++) {
         console.log(fruits[j])
           if(msg.message ===(fruits[j])){
             function sendEmail() {
-              console.log("I am running")
               Email.send({
-                  SecureToken: "8c9eb67a-3199-4287-8415-5beff73515d9",
-                  To : 'offeye123@gmail.com',
-                  From : "offeye123@gmail.com",
-                  Subject : "This",
-                  Body : "This is a meaningful text"
-              }).then(
-                message => alert(message)
-              );
-              }
+                SecureToken: "8c9eb67a-3199-4287-8415-5beff73515d9",
+                To: 'offeye123@gmail.com',
+                From: "offeye123@gmail.com",
+                Subject: "Here is more information about the Canada Job Expo for High School Students Just Like You!",
+                Body: "https://www.eventbrite.ca/e/canada-job-expo-july-2020-now-a-virtual-event-tickets-95752713945"
+              })
+            }
               sendEmail();
-            setTimeout(async(robo, roboDiv) => {
-              var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> JOB FINDER </b> I am a fruit. </p><span class="time-right"> now</span></div>'
+              setTimeout(async(robo, roboDiv) => {
+              function playAudio() {
+                  var audio = new Audio('https://github.com/xsharonhe/offeye/blob/master/welcome.mp3')
+                  audio.play();
+              }
+              var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Hold on a second...</p><span class="time-right"> now</span></div>'
               var roboDiv = document.getElementById("messagesBot")
-              var speech = "I am a fruit."
-            roboDiv.innerHTML += robo
+              roboDiv.innerHTML += robo
             }, 1000)
-      }}
+              setTimeout(async(robo, roboDiv) => {
+              var robo = '<div class="container">' + '<b style="color:#000" class="right-robo"> OffEye </b> Email has been sent! </p><span class="time-right"> now</span></div>'
+              var roboDiv = document.getElementById("messagesBot")
+            roboDiv.innerHTML += robo
+            }, 2000)
 
-    })
-  
+      }
+  }
+
+})
+
   window.onload = async function() {
     var msgs = await load_messages()
  
     for (i = 0; i < msgs.length; i++){
-      scroll = false
-      if (i == msgs.length-1) {scroll = true}
-      add_messages(msgs[i], scroll)
+      scrolled = false
+      if (i == msgs.length-1) {scrolled = true}
+      add_messages(msgs[i], scrolled)
     }
   
     let name = await load_name()

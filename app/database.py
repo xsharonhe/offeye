@@ -7,6 +7,7 @@ from datetime import datetime
 FILE = "messages.db"
 CHAT_TABLE = "Messages"
 JOB_TABLE = "Jobs"
+EMAIL_TABLE = "Emails"
 
 
 class DataBase:
@@ -44,6 +45,10 @@ class DataBase:
         second = f"""CREATE TABLE IF NOT EXISTS {JOB_TABLE}
                     (name TEXT, content_message TEXT, time Date, id INTEGER PRIMARY KEY AUTOINCREMENT)"""
         self.cursor.execute(second)
+        email = """CREATE TABLE IF NOT EXISTS {}
+                            (name TEXT, email TEXT)
+                        """.format(EMAIL_TABLE)
+        self.cursor.execute(email)
         self.conn.commit()
 
     def get_all_messages(self, limit=100, name=None):
@@ -92,7 +97,7 @@ class DataBase:
         
     def robo_messages(self, limit=100, name=None):
         """
-        returns all messages
+        returns all ROBOT messages
         :param limit: int
         :return: list[dict]
         """
@@ -105,7 +110,7 @@ class DataBase:
 
         result = self.cursor.fetchall()
 
-        # return messages in sorted order by date
+        #SORT BY DATE
         results = []
         for r in sorted(result, key=lambda x: x[3], reverse=True)[:limit]:
             name, content_message, date, _id = r
@@ -113,3 +118,9 @@ class DataBase:
             results.append(data)
 
         return list(reversed(results))
+
+
+    def save_email(self, name, email):
+        query = "INSERT INTO {} VALUES (?, ?)".format(EMAIL_TABLE)
+        self.cursor.execute(query, (name, email))
+        self.conn.commit()

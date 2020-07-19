@@ -2,13 +2,6 @@ from jinja2 import Undefined
 
 
 def _slice(iterable, pattern):
-    """
-    a custom built slice method that can be used
-    inside jijna template enginer
-    :param iterable: string
-    :param pattern: string ex (::-1)
-    :return: string
-    """
     if iterable is None or isinstance(iterable, Undefined):
         return iterable
 

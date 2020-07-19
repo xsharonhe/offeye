@@ -19,16 +19,15 @@
  {% endblock %}
 
 {% block content %}
-    <p id="test"> </p>
-    <div class="row" style="padding-top:10px;" >
+    <div class="row top" style=";" >
         <div class="col"><hr></div>
         <div class="col-auto"><p class="h3" align="center">{% block chat %} CHAT {% endblock %}</p></div>
         <div class="col"><hr></div>
     </div>
-    <div class="container">
-            <div id="messages" class="overflow-auto msgs" style="overflow-y: scroll; height:500px;">
+    <div class="container container-large">
+            <div id="messages" class="overflow-auto msgs">
             </div>
-            <form id="msgForm" action="" method="POST" style="bottom:0; margin: 0% 0% 0% 0%;">
+            <form id="msgForm" action="" method="POST">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Message" aria-label="Message" id="msg">
                     <div class="input-group-append">
