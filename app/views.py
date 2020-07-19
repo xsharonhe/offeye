@@ -144,15 +144,17 @@ def admin_form():
         return redirect(url_for("views.login"))
 
     if request.method == "POST":  # if user input a name
-        orgName = request.form["orgName"]
-        contactInfo = request.form["contactInfo"]
-        jobTitle = request.form["jobTitle"]
+        name = request.form["orgName"]
+        jobTitle = request.form["contactInfo"]
+        contact = request.form["jobTitle"]
         db = DataBase()
-        job = db.insert_jobs(orgName, contactInfo, jobTitle)
-        print(job)
+        job = db.insert_jobs(name, jobTitle, contact)
+        print(name)
+        print(contact)
+        print(jobTitle)
         redirect(url_for("views.jobpostings"))
 
-    return render_template("admin.html", **{"session": session})
+    return render_template("jobpostings.html", **{"session": session})
 
 
 @view.route('/jobpostings')
@@ -161,7 +163,9 @@ def jobpostings():
         flash("0Please login before viewing message history")
         return redirect(url_for("views.login"))
 
-
+    db = DataBase()
+    msgs = db.get_jobs(MSG_LIMIT)
+    print(msgs)
 
     return render_template("jobpostings.html", **{"session": session})
 

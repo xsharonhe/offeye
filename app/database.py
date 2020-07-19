@@ -142,9 +142,10 @@ class DataBase:
         return str(result)
 
 
-    def insert_jobs(self, name, job, contact):
+    def insert_jobs(self, name, jobTitle, contact):
         jobData = "INSERT INTO {} VALUES (?, ?, ?)".format(JOB_POSTINGS)
-        self.cursor.execute(jobData, (name, job, contact))
+        self.cursor.execute(jobData, (name, jobTitle, contact))
+        self.conn.commit()
 
 
     def get_jobs(self, limit=100):
