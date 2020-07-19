@@ -8,6 +8,7 @@ FILE = "messages.db"
 CHAT_TABLE = "Messages"
 JOB_TABLE = "Jobs"
 EMAIL_TABLE = "Emails"
+ADMIN_EMAILS = "Admins"
 
 
 class DataBase:
@@ -48,6 +49,10 @@ class DataBase:
         email = """CREATE TABLE IF NOT EXISTS {}
                             (name TEXT, email TEXT)
                         """.format(EMAIL_TABLE)
+        self.cursor.execute(email)
+        email = """CREATE TABLE IF NOT EXISTS {}
+                                    (name ADMIN, email TEXT)
+                                """.format(ADMIN_EMAILS)
         self.cursor.execute(email)
         self.conn.commit()
 
