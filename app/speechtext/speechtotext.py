@@ -37,8 +37,8 @@ class Speech():
         try:
             language = 'en'
             myobj = gTTS(text=text, lang=language, slow=False)
-            myobj.save("emailsent.mp3 ")
-            os.system("mpg321 emailsent.mp3")
+            myobj.save("opportunities.mp3")
+            os.system("mpg321 opportunities.mp3")
             return True 
         except Exception as e:
             print("[COULD NOT PLAY AUDIO]", e)
@@ -46,4 +46,4 @@ class Speech():
             return False 
 
 speech = Speech()
-speech.TextToSpeech("Email has been sent!")
+speech.TextToSpeech("Here are the opportunities we found.")
