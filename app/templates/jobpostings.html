@@ -3,3 +3,8 @@
 {% block noshowtitle %} Job Postings {% endblock %}
 
 {% block headtitle %}Job Postings! {% endblock %}
+
+{% block jsfiles %}
+    <script type="text/javascript"
+                    src="{{ url_for("static", filename="../static/responses/jobpostings.js")}}"> </script>
+    {% endblock %}

@@ -33,6 +33,8 @@
             {% endfor %}
         </div>
     </div>
+    {% block jsfiles %}
     <script type="text/javascript"
                     src="{{ url_for("static", filename="../static/responses/chat.js")}}"> </script>
-{% endblock %}
+    {% endblock %}
+    {% endblock %}
