@@ -149,9 +149,6 @@ def admin_form():
         contact = request.form["jobTitle"]
         db = DataBase()
         job = db.insert_jobs(name, jobTitle, contact)
-        print(name)
-        print(contact)
-        print(jobTitle)
         redirect(url_for("views.jobpostings"))
 
     return render_template("jobpostings.html", **{"session": session})

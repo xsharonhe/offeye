@@ -3,6 +3,7 @@
 {% block title %} {% block noshowtitle %} Message History {% endblock %}{% endblock %}
 {% block stylesheet %} 
 <link rel="stylesheet" href= "{{ url_for('static', filename='styles/chat.styles.css') }}">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='styles/jobfinder.styles.css') }}">
 {% endblock%}
 
 {% block messages %}
@@ -23,7 +24,7 @@
 {% block content %}
     <div class="row" style="padding-top:10px;" >
         <div class="col"><hr></div>
-        <div class="col-auto"><p class="h3" align="center">{% block headtitle %}View Message History {% endblock %}</p></div>
+        <div class="col-auto"><p class="h3" align="center">View Message History </p></div>
         <div class="col"><hr></div>
     </div>
     <div class="container">
@@ -33,8 +34,6 @@
             {% endfor %}
         </div>
     </div>
-    {% block jsfiles %}
     <script type="text/javascript"
                     src="{{ url_for("static", filename="../static/responses/chat.js")}}"> </script>
-    {% endblock %}
     {% endblock %}
