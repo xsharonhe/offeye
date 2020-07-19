@@ -9,8 +9,10 @@ CHAT_TABLE = "Messages"
 JOB_TABLE = "Jobs"
 EMAIL_TABLE = "Emails"
 ADMIN_EMAILS = "Admins"
+##
 SAMPLE_ADMIN = "YOUTH HACKS"
-
+##
+JOB_POSTINGS = "Job Postings"
 
 class DataBase:
     def __init__(self):
@@ -54,6 +56,10 @@ class DataBase:
         self.cursor.execute(email)
         admin = "INSERT INTO {} VALUES (?)".format(ADMIN_EMAILS)
         self.cursor.execute(admin, (SAMPLE_ADMIN, ))
+        job = """CREATE TABLE IF NOT EXISTS {}
+                                            (name TEXT, jobTitle TEXT, contact TEXT)
+                                        """.format(JOB_POSTINGS)
+        self.cursor.execute(job)
         self.conn.commit()
 
     def get_all_messages(self, limit=100, name=None):
