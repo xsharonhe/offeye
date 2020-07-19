@@ -1,13 +1,13 @@
 async function add_jobs(job, scrolled){
   if( typeof job.orgName !== 'undefined' ) {
     var orgName = await load_orgName()
+      console.log(orgName)
       var jobTitle = await load_jobTitle()
+      var contact = await load_contact()
 
-    var content = '<div class="container">' + '<b style="color:#000" class="right">'+orgName.name+'</b><p>' + orgName.jobTitle +'</p><span class="time-right">' + n + '</span></div>'
-    if (orgName == orgName.name){
-      content = '<div class="container darker">' + '<b style="color:#000" class="left">'+orgName.name+'</b><p>' + orgName.jobTitle +'</p><span class="time-left">' + n + '</span></div>'
-    }
+    var content = '<div class="container">' + '<b style="color:#000" class="right">'+ orgName +'</b><p>' + jobTitle +'</p><br/><p>' + contact + '</p></div>'
     // update div
+      console.log("added")
     var messageDiv = document.getElementById("messages")
     messageDiv.innerHTML += content
   }
@@ -30,7 +30,6 @@ async function load_jobTitle(){
        .then(async function (response) {
           return await response.json();
       }).then(function (text) {
-          console.log(text[0]["jobTitle"])
           return text[0]["jobTitle"]
       });
 };
@@ -47,6 +46,15 @@ async function load_orgName(){
       });
 };
 
+
+async function load_contact(){
+  return await fetch('/get_jobs')
+       .then(async function (response) {
+          return await response.json();
+      }).then(function (text) {
+          return text[0]["time"]
+      });
+};
 
 async function load_name(){
   return await fetch('/get_name')
