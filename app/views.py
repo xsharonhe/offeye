@@ -37,7 +37,13 @@ def login():
                 # VALIDATE ADMIN
                 print("I HAVE REACHED HERE")
                 msgs = db.find_admin()
-                if name != "YOUTH HACKS":
+                name = "('" + name + "',)"
+                admin = ''.join(msgs)
+                print(name)
+                print(type(msgs))
+                print(type(admin))
+                if name != admin:
+                    print(admin)
                     flash("0You are not an admin.")
                     return redirect(url_for("views.login"))
                 else:
