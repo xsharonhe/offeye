@@ -8,6 +8,7 @@ FILE = "messages.db"
 CHAT_TABLE = "Messages"
 JOB_TABLE = "Jobs"
 EMAIL_TABLE = "Emails"
+ADMIN_EMAILS = "Admins"
 
 
 class DataBase:
@@ -49,6 +50,12 @@ class DataBase:
                             (name TEXT, email TEXT)
                         """.format(EMAIL_TABLE)
         self.cursor.execute(email)
+        email = """CREATE TABLE IF NOT EXISTS {}
+                                    (name ADMIN)
+                                """.format(ADMIN_EMAILS)
+        self.cursor.execute(email)
+        create_admin = "INSERT INTO {} VALUES (?)".format(ADMIN_EMAILS)
+        self.cursor.execute(create_admin, ("YOUTH HACKS"))
         self.conn.commit()
 
     def get_all_messages(self, limit=100, name=None):
@@ -76,21 +83,10 @@ class DataBase:
         return list(reversed(results))
 
     def get_messages_by_name(self, name, limit=100):
-        """
-        Gets a list of messages by user name
-        :param name: str
-        :return: list
-        """
         return self.get_all_messages(limit, name)
 
+
     def save_message(self, name, msg):
-        """
-        saves the given message in the table
-        :param name: str
-        :param msg: str
-        :param time: datetime
-        :return: None
-        """
         query = f"INSERT INTO {CHAT_TABLE} VALUES (?, ?, ?, ?)"
         self.cursor.execute(query, (name, msg, datetime.now(), None))
         self.conn.commit()
@@ -124,3 +120,15 @@ class DataBase:
         query = "INSERT INTO {} VALUES (?, ?)".format(EMAIL_TABLE)
         self.cursor.execute(query, (name, email))
         self.conn.commit()
+
+
+    def admin_collection(self, admin):
+        query = "INSERT INTO {} VALUES (?, ?)".format(ADMIN_EMAILS)
+        self.cursor.execute(query, ())
+        self.conn.commit()
+
+
+    def find_admin(self, name):
+        if not name:
+            query = f"SELECT * FROM {JOB_TABLE}"
+            self.cursor.execute(query)
