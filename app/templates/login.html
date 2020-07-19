@@ -5,30 +5,6 @@
 <link rel="stylesheet" href= "{{ url_for('static', filename='styles/login.styles.css') }}">
 {% endblock%}
 
-{% block messages %}
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-            {% for message in messages %}
-              {% set display = slice(message, "1:") %}
-              {% set prefix = slice[0] %}
-              {% if prefix == "1" %}
-                <div class="alert alert-info alert-dismissible" role="alert">
-                <span aria-hidden="true">&times;</span>
-                {{ display }}
-                </div>
-              {% else %}
-                <div class="alert alert-danger alert-dismissibler" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{ display }}
-                </div>
-              {% endif %}
-            {% endfor %}
-      {% endif %}
-    {% endwith %}
-{% endblock %}
-
 {% block content %}
     <div class="login-form" id="login">
         <h1> Login </h1>
